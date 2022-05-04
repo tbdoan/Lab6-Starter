@@ -12,19 +12,21 @@ import edu.ucsd.cse110.lab6.misc.Constants;
 @SuppressWarnings("unused")
 public class Exercises {
     public static double mean(List<Integer> numbers) {
-        int sum = 0;
+        // bug: integer division
+        double sum = 0;
         for (int number : numbers) {
             sum += number;
         }
-        return sum / numbers.size();
+        return sum / (double) numbers.size();
     }
 
     public static double standardDeviation(List<Integer> numbers) {
         double mean = mean(numbers);
 
-        int deviationSum = 0;
+        float deviationSum = 0;
         for (int number : numbers) {
-            deviationSum += Math.pow(mean - number, 2);
+            // mean - number -> number - mean
+            deviationSum += Math.pow(number - mean, 2);
         }
 
         int length = numbers.size();
